@@ -1,0 +1,26 @@
+# Kubernetes Deployment Config
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-second-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-second
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: fastapi-second
+        tier: backend
+    spec:
+      containers:
+        - name: second-node
+          image: derabyte/fastapi-kub:latest
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: fastapi-volume
+          emptyDir: {}
