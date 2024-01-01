@@ -16,6 +16,7 @@ async def home():
 async def error():
     os.kill(os.getpid(), signal.SIGTERM)
 
-@app.get("/services")
+
+@app.get("/services", tags="services")
 async def get_services():
     return JSONResponse({}, status_code=200)
