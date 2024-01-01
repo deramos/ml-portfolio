@@ -2,6 +2,7 @@ import sys
 import os
 import signal
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
 app = FastAPI(title="Kubernetes Experimentation", version="1.0")
 
@@ -14,3 +15,7 @@ async def home():
 @app.get("/error")
 async def error():
     os.kill(os.getpid(), signal.SIGTERM)
+
+@app.get("/services")
+async def get_services():
+    return JSONResponse({}, status_code=200)
